@@ -10,7 +10,7 @@ const App = () => {
   const addListener = () => document.body.addEventListener('click', rollDice)
   const removeListener = () => document.body.removeEventListener('click', rollDice)
 
-  document.body.style.backgroundColor = rolling ? '#f0f0f0' : '#8ab4f8'
+  document.body.style.backgroundColor = rolling ? 'black' : '#8ab4f8'
 
   useEffect(() => {
     addListener()
