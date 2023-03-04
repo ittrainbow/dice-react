@@ -1,38 +1,165 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: #8ab4f8;
+  transition: 0.5s;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  place-items: center;
+  width: 250px;
+  background: #f0f0f0;
+  border-radius: 30px;
+  padding: 75px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.diceOne,
+.diceTwo,
+.rollSector {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+  transition: 0.5s ease-in;
+}
+
+.diceOne,
+.diceTwo {
+  transform: rotate3d(1, 1, 1, 0deg);
+}
+
+.rollSector {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes rolling {
+  35% {
+    transform: rotateX(445deg) rotateY(445deg);
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 5px solid #f6f3f0;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  background: linear-gradient(145deg, #dddbd8, #fff);
+}
+
+.face::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: #f6f3f0;
+  transform: translateZ(-1px);
+}
+
+.face::after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #131210;
+}
+
+.front {
+  transform: translateZ(50px);
+}
+
+.back {
+  transform: rotateX(180deg) translateZ(50px);
+}
+
+.top {
+  transform: rotateX(90deg) translateZ(50px);
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateZ(50px);
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(50px);
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(50px);
+}
+
+.front::after {
+  width: 30px;
+  height: 30px;
+  background: #448bfe;
+  margin: -15px 0 0 -15px;
+}
+
+.back::after {
+  margin: -35px 0 0 -30px;
+  box-shadow: 40px 0, 0 25px, 40px 25px, 0 50px, 40px 50px;
+}
+
+.top::after {
+  margin: -30px 0 0 -30px;
+  box-shadow: 40px 40px;
+}
+
+.bottom::after {
+  margin: -33px 0 0 -33px;
+  box-shadow: 25px 25px, 50px 50px, 50px 0, 0 50px;
+}
+
+.right::after {
+  margin: -28px 0 0 -28px;
+  box-shadow: 40px 0, 0 40px, 40px 40px;
+}
+
+.left::after {
+  margin: -33px 0 0 -33px;
+  box-shadow: 25px 25px, 50px 50px;
+}
+
+.roll,
+.roll-disabled {
+  cursor: pointer;
+  width: 92px;
+  height: 50px;
+  color: #448bfe;
+  border: 2px solid #448bfe;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: 'Georgia';
+  transition: 0.22s all ease-in-out;
+}
+
+.roll-disabled {
+  cursor: none;
+  color: #ddd;
+  border: 2px solid #ddd;
+}
+
+.roll:hover {
+  color: #fff;
+  background: #448bfe;
 }
