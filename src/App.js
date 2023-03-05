@@ -59,24 +59,24 @@ const App = () => {
       switch (randomTwo) {
         case 1:
           setDiceTwoTransform('rotateX(0deg) rotateY(0deg)')
-          return
+          break
         case 2:
           setDiceTwoTransform('rotateX(-90deg) rotateY(0deg)')
-          return
+          break
         case 3:
           setDiceTwoTransform('rotateX(0deg) rotateY(90deg)')
-          return
+          break
         case 4:
           setDiceTwoTransform('rotateX(0deg) rotateY(-90deg)')
-          return
+          break
         case 5:
           setDiceTwoTransform('rotateX(90deg) rotateY(0deg)')
-          return
+          break
         case 6:
           setDiceTwoTransform('rotateX(180deg) rotateY(0deg)')
-          return
+          break
         default:
-          return
+          break
       }
     }, 250)
 
