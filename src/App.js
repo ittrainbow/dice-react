@@ -6,22 +6,29 @@ const App = () => {
   const [rolling, setRolling] = useState(false)
   const [diceOneTransform, setDiceOneTransform] = useState()
   const [diceTwoTransform, setDiceTwoTransform] = useState()
+  const [delayOne, setDelayOne] = useState(2)
+  const [delayTwo, setDelayTwo] = useState(2)
 
   const addListener = () => document.body.addEventListener('click', rollDice)
   const removeListener = () => document.body.removeEventListener('click', rollDice)
 
-  document.body.style.backgroundColor = rolling ? 'black' : '#8ab4f8'
-
   useEffect(() => {
-    addListener()
-    // eslint-disable-next-line
+    rollDice() // eslint-disable-next-line
   }, [])
 
+  const random = (span) => {
+    return Math.floor(Math.random() * span) + 1
+  }
+
   const rollDice = () => {
+    const randomOne = random(6)
+    const randomTwo = random(6)
+    const randomThree = random(25) / 10 + 2
+    const randomFour = random(25) / 10 + 2
+    setDelayOne(randomThree)
+    setDelayTwo(randomFour)
     removeListener()
     setRolling(true)
-    const randomOne = Math.floor(Math.random() * 6) + 1
-    const randomTwo = Math.floor(Math.random() * 6) + 1
 
     setTimeout(() => {
       switch (randomOne) {
@@ -46,44 +53,47 @@ const App = () => {
         default:
           break
       }
-    }, 2350)
+    }, 250)
 
     setTimeout(() => {
       switch (randomTwo) {
         case 1:
           setDiceTwoTransform('rotateX(0deg) rotateY(0deg)')
-          break
+          return
         case 2:
           setDiceTwoTransform('rotateX(-90deg) rotateY(0deg)')
-          break
+          return
         case 3:
           setDiceTwoTransform('rotateX(0deg) rotateY(90deg)')
-          break
+          return
         case 4:
           setDiceTwoTransform('rotateX(0deg) rotateY(-90deg)')
-          break
+          return
         case 5:
           setDiceTwoTransform('rotateX(90deg) rotateY(0deg)')
-          break
+          return
         case 6:
           setDiceTwoTransform('rotateX(180deg) rotateY(0deg)')
-          break
+          return
         default:
-          break
+          return
       }
-    }, 3050)
+    }, 250)
 
     setTimeout(() => {
-      addListener()
       setRolling(false)
-    }, 3400)
+      addListener()
+    }, Math.max(randomThree, randomFour) * 1000 + 100)
   }
 
   return (
-    <div className="container" style={{ backgroundColor: rolling ? '#f0f0f0' : '8ab4f8' }}>
+    <div className="container" style={{ backgroundColor: rolling ? '#f0f0f0' : '#dfdfdf' }}>
       <div
         className="diceOne"
-        style={{ animation: rolling ? 'rolling 2.3s' : 'none', transform: diceOneTransform }}
+        style={{
+          animation: rolling ? `rolling${random(2)} ${delayOne}s` : 'none',
+          transform: diceOneTransform
+        }}
       >
         <div className="face front"></div>
         <div className="face back"></div>
@@ -94,7 +104,10 @@ const App = () => {
       </div>
       <div
         className="diceTwo"
-        style={{ animation: rolling ? 'rolling 3.0s' : 'none', transform: diceTwoTransform }}
+        style={{
+          animation: rolling ? `rolling${random(2)} ${delayTwo}s` : 'none',
+          transform: diceTwoTransform
+        }}
       >
         <div className="face front"></div>
         <div className="face back"></div>
@@ -103,6 +116,7 @@ const App = () => {
         <div className="face right"></div>
         <div className="face left"></div>
       </div>
+      <div className={!rolling ? 'roll' : 'roll-disabled'}>ROLL</div>
     </div>
   )
 }

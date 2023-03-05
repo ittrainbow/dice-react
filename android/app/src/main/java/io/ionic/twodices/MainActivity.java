@@ -1,4 +1,4 @@
-package io.ionic.dice;
+package io.ionic.twodices;
 
 import com.getcapacitor.BridgeActivity;
 

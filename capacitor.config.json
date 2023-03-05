@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.dice",
-  "appName": "dice",
+  "appId": "io.ionic.twodices",
+  "appName": "Two Dices",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
