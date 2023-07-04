@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react'
+import NoSleep from 'nosleep.js'
+
 import './App.css'
 
-import { useState, useEffect } from 'react'
-
 const App = () => {
+  const nosleep = new NoSleep()
   const [rolling, setRolling] = useState(false)
   const [diceOneTransform, setDiceOneTransform] = useState()
   const [diceTwoTransform, setDiceTwoTransform] = useState()
@@ -13,6 +15,7 @@ const App = () => {
   const removeListener = () => document.body.removeEventListener('click', rollDice)
 
   useEffect(() => {
+    nosleep.enable()
     rollDice() // eslint-disable-next-line
   }, [])
 
